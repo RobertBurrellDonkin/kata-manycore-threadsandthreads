@@ -11,7 +11,7 @@ Read on for the exercises...
 Exercise One 
 ------------
 
-Take a look at the code in `ExerciseOneAppAMinimalCache`
+Take a look at the code in [`ExerciseOneAppAMinimalCache`](blob/master/src/main/java/name/robertburrelldonkin/kata/manycore/threadsandthreads/ExerciseOneAppAMinimalCache.java) (in `name.robertburrelldonkin.kata.manycore.threadsandthreads`)
 
 
 1. Take a look at `Cache` and `CacheClient`. What behaviour would you expect when you run the client using:

@@ -20,9 +20,18 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * An bare bones cache.
+ * <h3>Application code for Session One, Exercise One.</h3>
+ * <ul>
+ * <li><code>Cache</code> is a toy cache, lazily caching an integer value.</li>
+ * <li><code>CacheClient</code> exercises the Cache API.</li>
+ * <li><code>Harness</code> prepares and runs <code>CacheClient</code> instances
+ * concurrently.</li>
+ * </ul>
+ * <p>
+ * The main method is simple and tucked away at the bottom.
+ * </p>
  */
-public class RunMinimalCache {
+public class ExerciseOneAppAMinimalCache {
 
     static class Cache {
 

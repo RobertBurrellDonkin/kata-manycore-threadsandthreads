@@ -1,4 +1,4 @@
-kata-manycore-threadsandthreads
-===============================
+Exercises for Many Core Session One: Threads and Threads
+==============================================
 
-Some exercises for session one "Threads and Threads - starting with a single core" of my short course about developing Java on many cores.
+The slides for Many Cores, Session One _Threads and Threads_ are [here](http://www.slideshare.net/robertburrelldonkin/threads-and-threads). This project contains the Break Out exercises for Session One.

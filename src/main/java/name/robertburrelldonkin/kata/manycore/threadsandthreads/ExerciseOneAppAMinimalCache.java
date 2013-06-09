@@ -23,7 +23,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  * <h3>Application code for Session One, Exercise One.</h3>
  * <ul>
  * <li><code>Cache</code> is a toy cache, lazily caching an integer value.</li>
- * <li><code>CacheClient</code> exercises the Cache API.</li>
+ * <li><code>CacheClient</code> exercises the <code>Cache</code> API.</li>
  * <li><code>Harness</code> prepares and runs <code>CacheClient</code> instances
  * concurrently.</li>
  * </ul>
@@ -33,6 +33,7 @@ import java.util.concurrent.atomic.AtomicInteger;
  */
 public class ExerciseOneAppAMinimalCache {
 
+    /** A toy cache, lazily caching an integer value */
     static class Cache {
 
         private Integer cachedValueWithLazyLoad = null;
@@ -52,6 +53,7 @@ public class ExerciseOneAppAMinimalCache {
         }
     }
 
+    /** Exercises the <code>Cache</code> API */
     static class CacheClient {
 
         final int startingCount;
@@ -78,6 +80,10 @@ public class ExerciseOneAppAMinimalCache {
         }
     }
 
+    /**
+     * Prepares and runs <code>CacheClient</code> instances
+     * concurrently
+     */
     static class Harness {
 
         final int startingCount;
@@ -145,6 +151,7 @@ public class ExerciseOneAppAMinimalCache {
         }
     }
 
+    /** Simply runs the harness. Vary the parameters and observe the results. */
     public static void main(String[] args) throws Exception {
         new Harness(1000).startThreadsNumbering(100);
     }

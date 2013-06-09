@@ -11,7 +11,7 @@ Read on for the exercises...
 Exercise One 
 ------------
 
-Take a look at the code in [`ExerciseOneAppAMinimalCache`](master/src/main/java/name/robertburrelldonkin/kata/manycore/threadsandthreads/ExerciseOneAppAMinimalCache.java) (in `name.robertburrelldonkin.kata.manycore.threadsandthreads`)
+Take a look at the code in [`ExerciseOneAppAMinimalCache`](src/main/java/name/robertburrelldonkin/kata/manycore/threadsandthreads/ExerciseOneAppAMinimalCache.java) (in `name.robertburrelldonkin.kata.manycore.threadsandthreads`)
 
 
 1. Take a look at `Cache` and `CacheClient`. What behaviour would you expect when you run the client using:
@@ -36,3 +36,5 @@ Take a look at the code in [`ExerciseOneAppAMinimalCache`](master/src/main/java/
     1. Outline three different approaches
 
     2. For each approach, describe one advantage and one disadvantage 
+
+

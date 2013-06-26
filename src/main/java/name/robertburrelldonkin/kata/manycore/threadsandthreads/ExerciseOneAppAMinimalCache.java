@@ -20,7 +20,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * <h3>Application code for Session One, Exercise One.</h3>
+ * <h3>A solution for Session One, Exercise One.</h3>
+ * <p>
+ * Guards both read and write access with method level synchronization.
+ * </p>
  * <ul>
  * <li><code>Cache</code> is a toy cache, lazily caching an integer value.</li>
  * <li><code>CacheClient</code> exercises the <code>Cache</code> API.</li>
@@ -41,14 +44,16 @@ public class ExerciseOneAppAMinimalCache {
         Cache() {
         }
 
-        int getValue() throws Exception {
+        /* MUST guard both read and write */
+        synchronized int getValue() throws Exception {
             if (cachedValueWithLazyLoad == null) {
                 cachedValueWithLazyLoad = new Integer(42);
             }
             return cachedValueWithLazyLoad.intValue();
         }
 
-        void flush() {
+        /* MUST guard both read and write */
+        synchronized void flush() {
             cachedValueWithLazyLoad = null;
         }
     }

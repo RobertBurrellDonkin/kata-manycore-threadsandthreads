@@ -20,7 +20,11 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * <h3>Application code for Session One, Exercise One.</h3>
+ * <h3>A solution for Session One, Exercise One.</h3>
+ * <p>
+ * Bit of a trick solution this one, but illustrates an important lesson about
+ * mutable state.
+ * </p>
  * <ul>
  * <li><code>Cache</code> is a toy cache, lazily caching an integer value.</li>
  * <li><code>CacheClient</code> exercises the <code>Cache</code> API.</li>
@@ -36,20 +40,16 @@ public class ExerciseOneAppAMinimalCache {
     /** A toy cache, lazily caching an integer value */
     static class Cache {
 
-        private Integer cachedValueWithLazyLoad = null;
+        private final Integer cachedValueWithLazyLoad = new Integer(42);
 
         Cache() {
         }
 
         int getValue() throws Exception {
-            if (cachedValueWithLazyLoad == null) {
-                cachedValueWithLazyLoad = new Integer(42);
-            }
             return cachedValueWithLazyLoad.intValue();
         }
 
         void flush() {
-            cachedValueWithLazyLoad = null;
         }
     }
 

@@ -20,7 +20,10 @@ import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
 
 /**
- * <h3>Application code for Session One, Exercise One.</h3>
+ * <h3>A solution for Session One, Exercise One.</h3>
+ * <p>
+ * A non-blocking solution that uses local variable assignment.
+ * </p>
  * <ul>
  * <li><code>Cache</code> is a toy cache, lazily caching an integer value.</li>
  * <li><code>CacheClient</code> exercises the <code>Cache</code> API.</li>
@@ -42,10 +45,14 @@ public class ExerciseOneAppAMinimalCache {
         }
 
         int getValue() throws Exception {
-            if (cachedValueWithLazyLoad == null) {
-                cachedValueWithLazyLoad = new Integer(42);
+            /* Confine copy to read method */
+            Integer localCopyOfCachedValueWithLazyLoad = cachedValueWithLazyLoad;
+            if (localCopyOfCachedValueWithLazyLoad == null) {
+                localCopyOfCachedValueWithLazyLoad = new Integer(42);
             }
-            return cachedValueWithLazyLoad.intValue();
+            /* Cache value before returning */
+            cachedValueWithLazyLoad = localCopyOfCachedValueWithLazyLoad;
+            return localCopyOfCachedValueWithLazyLoad.intValue();
         }
 
         void flush() {

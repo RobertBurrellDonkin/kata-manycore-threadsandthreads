@@ -18,9 +18,14 @@ package name.robertburrelldonkin.kata.manycore.threadsandthreads;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * <h3>Application code for Session One, Exercise One.</h3>
+ * <h3>Solution for Session One, Exercise One.</h3>
+ * <p>
+ * A toy solution using CAS. This is more intended to demostrate the idiom,
+ * rather than supply a serious solution.
+ * </p>
  * <ul>
  * <li><code>Cache</code> is a toy cache, lazily caching an integer value.</li>
  * <li><code>CacheClient</code> exercises the <code>Cache</code> API.</li>
@@ -36,20 +41,23 @@ public class ExerciseOneAppAMinimalCache {
     /** A toy cache, lazily caching an integer value */
     static class Cache {
 
-        private Integer cachedValueWithLazyLoad = null;
+        private final AtomicReference<Integer> cachedValueWithLazyLoad = new AtomicReference<Integer>();
 
         Cache() {
         }
 
         int getValue() throws Exception {
-            if (cachedValueWithLazyLoad == null) {
-                cachedValueWithLazyLoad = new Integer(42);
+            Integer currentCachedValueWithLazyLoad = cachedValueWithLazyLoad
+                    .get();
+            while (currentCachedValueWithLazyLoad == null) {
+                cachedValueWithLazyLoad.compareAndSet(null, new Integer(42));
+                currentCachedValueWithLazyLoad = cachedValueWithLazyLoad.get();
             }
-            return cachedValueWithLazyLoad.intValue();
+            return currentCachedValueWithLazyLoad.intValue();
         }
 
         void flush() {
-            cachedValueWithLazyLoad = null;
+            cachedValueWithLazyLoad.set(null);
         }
     }
 

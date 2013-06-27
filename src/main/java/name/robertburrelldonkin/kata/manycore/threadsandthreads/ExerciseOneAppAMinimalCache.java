@@ -18,9 +18,14 @@ package name.robertburrelldonkin.kata.manycore.threadsandthreads;
 
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 /**
- * <h3>Application code for Session One, Exercise One.</h3>
+ * <h3>A solution for Session One, Exercise One.</h3>
+ * <p>
+ * Uses paired read and write locks.
+ * </p>
  * <ul>
  * <li><code>Cache</code> is a toy cache, lazily caching an integer value.</li>
  * <li><code>CacheClient</code> exercises the <code>Cache</code> API.</li>
@@ -36,20 +41,36 @@ public class ExerciseOneAppAMinimalCache {
     /** A toy cache, lazily caching an integer value */
     static class Cache {
 
+        private final ReadWriteLock lockGuardsCachedValueWithLazyLoad = new ReentrantReadWriteLock();
         private Integer cachedValueWithLazyLoad = null;
 
         Cache() {
         }
 
         int getValue() throws Exception {
-            if (cachedValueWithLazyLoad == null) {
-                cachedValueWithLazyLoad = new Integer(42);
+            lockGuardsCachedValueWithLazyLoad.readLock().lock();
+            try {
+
+                if (cachedValueWithLazyLoad == null) {
+                    cachedValueWithLazyLoad = new Integer(42);
+                }
+                return cachedValueWithLazyLoad.intValue();
+
             }
-            return cachedValueWithLazyLoad.intValue();
+            finally {
+                lockGuardsCachedValueWithLazyLoad.readLock().unlock();
+            }
         }
 
         void flush() {
-            cachedValueWithLazyLoad = null;
+            lockGuardsCachedValueWithLazyLoad.writeLock().lock();
+            try {
+                cachedValueWithLazyLoad = null;
+            }
+            finally {
+                lockGuardsCachedValueWithLazyLoad.writeLock().unlock();
+            }
+
         }
     }
 
